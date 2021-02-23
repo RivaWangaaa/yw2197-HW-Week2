@@ -10,7 +10,7 @@ public class Monster : MonoBehaviour
     public static Monster instance;
     private float timer = 0;
     
-    void Awake()
+    void Awake() // create Singleton
     {
         if (instance == null) 
         {
@@ -32,15 +32,16 @@ public class Monster : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        timer += Time.deltaTime;
-        if (timer >= 3)
+        timer += Time.deltaTime; // timer count the time
+        if (timer >= 3) //every 3 seconds, the monster appears at a different spot
         {
             transform.position = new Vector2( //teleport to a random location
                 Random.Range(-5,5),
                 Random.Range(-5,5));
 
-            timer = 0;
-            GameManager.instance.score++;
+            timer = 0; 
+            
+            GameManager.instance.Score++; // if the player survives, score + 1;
             
         }
 
@@ -48,11 +49,14 @@ public class Monster : MonoBehaviour
     }
 
 
-
+// Sorry i couldn't get this function to work, I will seek help and fix this.
+// It supposed to be a function that detects monster and player collision.
     private void OnCollisionEnter2D(Collision2D other)
     {
-
-        print("End");
-        SceneManager.LoadScene("EndScene");
+        if (other.gameObject.tag == "Player") //if collide with "Player" object, player loses.
+        {
+            print("End");
+            SceneManager.LoadScene("EndScene");
+        }
     }
 }

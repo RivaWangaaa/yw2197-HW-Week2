@@ -5,12 +5,12 @@ using UnityEngine.SceneManagement;
 
 public class PlayerControl : MonoBehaviour
 {
-    public float forceAmount = 5;  
+    public float forceAmount = 5;  //set forceAmount to determine how fast player move.
     
     Rigidbody2D rb2D;
     public static PlayerControl instance;
     
-    void Awake()
+    void Awake() //create singleton
     {
         if (instance == null)  
         {
@@ -32,6 +32,7 @@ public class PlayerControl : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        //WASD Controller
         if (Input.GetKey(KeyCode.W)) //if W is pressed
         {
             rb2D.AddForce(Vector2.up * forceAmount); 
